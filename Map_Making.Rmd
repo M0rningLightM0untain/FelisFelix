@@ -1,0 +1,63 @@
+---
+title: "Mapping"
+author: "Jack Sudds"
+date: "06/11/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r packages}
+library(tidyverse) #install.packages("tidyverse")
+library(readxl) #install.packages("readxl")
+library(here) #install.packages("here")
+library(janitor) #install.packages("janitor")
+library(kableExtra) #install.packages("kableExtra")
+library(skimr) #install.packages("skimr")
+library(dplyr) #install.packages("dplyr")
+library(RColorBrewer) #install.packages("RColorBrewer")
+library(formattable) #install.packages("formattable")
+library(wesanderson)#install.packages("wesanderson")
+library(reshape2)
+library(ggtext) #install.packages("ggtext")
+library(sf)
+library(rnaturalearth)
+library(rnaturalearthdata)
+library(ggrepel) #install.packages("ggrepel")
+```
+
+```{r import}
+
+latlong <- read_excel(here("data", "Felis_latlong.xlsx"), sheet = "Sheet1")
+
+EU <- read_excel(here("data", "Felis_latlong.xlsx"), sheet = "Sheet2")
+
+world <- ne_countries(scale = "medium", returnclass = "sf")
+class(world)
+```
+
+```{r map making}
+
+ggplot(data = world) +
+  geom_sf() +
+  theme_minimal() +
+  coord_sf(xlim = c(-5.5, 2.50), ylim = c(49.8, 56), expand = FALSE) +
+  xlab("Longitude") + ylab("Latitude") +
+  geom_point(data = latlong, aes(x = long, y= lat))+
+  geom_label_repel(data = latlong, aes(label = Marker, x = long, y = lat, fontface = "bold"),label.size = NA, fill = "#FF0000", color = "black", segment.colour = "#FF0000", max.overlaps  = Inf, min.segment.length = 0)+
+  scale_fill_discrete(aesthetics = c("fill", "segment.color"))
+
+ggsave(here("figure", "samples.jpeg"), last_plot(), dpi = 700)
+
+ggplot(data = world) +
+  geom_sf() +
+  theme_minimal() +
+  coord_sf(xlim = c(-12, 25), ylim = c(35, 62.5), expand = FALSE) +
+  xlab("Longitude") + ylab("Latitude") +
+  geom_point(data = EU, aes(x = long, y= lat))+
+  geom_label_repel(data = EU, aes(label = Marker, x = long, y = lat, fontface = "bold"),label.size = NA, fill = "#FF0000", color = "black", segment.colour = "#FF0000", max.overlaps  = Inf, min.segment.length = 0)+
+  scale_fill_discrete(aesthetics = c("fill", "segment.color"))
+
+ggsave(here("figure", "EU.jpeg"), last_plot(), dpi = 700)
