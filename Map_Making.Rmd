@@ -30,9 +30,9 @@ library(ggrepel) #install.packages("ggrepel")
 
 ```{r import}
 
-latlong <- read_excel(here("data", "Felis_latlong.xlsx"), sheet = "Sheet1")
+latlong <- read_excel(here("data", "FelisFelix.xlsx"), sheet = "UK_latlong")
 
-EU <- read_excel(here("data", "Felis_latlong.xlsx"), sheet = "Sheet2")
+EU <- read_excel(here("data", "FelisFelix.xlsx"), sheet = "EU_latlong")
 
 world <- ne_countries(scale = "medium", returnclass = "sf")
 class(world)

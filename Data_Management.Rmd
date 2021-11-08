@@ -9,4 +9,170 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-#Creation of R version of Cat data from UG
+```{r Packages}
+
+library(tidyverse) #install.packages("tidyverse")
+library(readxl) #install.packages("readxl")
+library(here) #install.packages("here")
+library(janitor) #install.packages("janitor")
+library(kableExtra) #install.packages("kableExtra")
+library(skimr) #install.packages("skimr")
+library(dplyr) #install.packages("dplyr")
+library(RColorBrewer) #install.packages("RColorBrewer")
+library(formattable) #install.packages("formattable")
+library(wesanderson)#install.packages("wesanderson")
+library(reshape2)
+library(ggtext) #install.packages("ggtext")
+library(psych)#install.packages("psych")
+library(BSDA) #install.packages("BSDA")
+library(qpcR) #install.packages("qpcR")
+
+```
+
+```{r Data Import}
+
+RAW_BritRef <- read_excel(here("data", "FelisFelix.xlsx"), sheet = "UK_Ref")
+
+RAW_EURef <- read_excel(here("data", "FelisFelix.xlsx"), sheet = "EU_Ref")
+
+RAW_Archaeo <- read_excel(here("data", "FelisFelix.xlsx"), sheet = "Main_Samples")
+
+```
+
+```{r Data Tidying}
+BritRef <- RAW_BritRef
+EURef <- RAW_EURef
+Archaeo <- RAW_Archaeo
+```
+
+```{r UK Reference Samples}
+
+ggplot(BritRef, aes(x=d13C, y=d15N, colour = Species, shape = Source))+
+geom_point(show.legend = TRUE) +
+  theme(
+    plot.title = element_text(hjust = 0.5, face = 'bold'),
+        panel.background = element_rect(fill = 'white'),
+        panel.grid.major.x = element_line('darkgrey'),
+        panel.grid.major.y = element_line(color = 'darkgrey'),
+        axis.line = element_line(color = "black"),
+        panel.grid.minor.x = element_line(color = 'gray'),
+        panel.grid.minor.y = element_line(color = 'gray')
+  )+
+  xlab(expression(paste(delta^"13","C\u2030")))+
+  ylab(expression(paste(delta^"15","N\u2030")))
+
+```
+
+```{r EU Reference Sample}
+
+ggplot(EURef, aes(x=Carbon, y=Nitrogen, colour = Date, shape = Location))+
+geom_point(show.legend = TRUE, size = 4) +
+  theme(
+    plot.title = element_text(hjust = 0.5, face = 'bold'),
+        panel.background = element_rect(fill = 'white'),
+        panel.grid.major.x = element_line('darkgrey'),
+        panel.grid.major.y = element_line(color = 'darkgrey'),
+        axis.line = element_line(color = "black"),
+        panel.grid.minor.x = element_line(color = 'gray'),
+        panel.grid.minor.y = element_line(color = 'gray')
+  )+
+  xlab(expression(paste(delta^"13","C\u2030")))+
+  ylab(expression(paste(delta^"15","N\u2030")))+
+  coord_cartesian(xlim = c(-21, -16), ylim = c(6.5, 14))
+
+```
+
+```{r Archaeological Samples}
+
+ggplot(filter(Archaeo, Period == "Iron Age"), aes(x=d13C, y=d15N, colour = Site))+
+geom_point(show.legend = TRUE, size = 2) +
+  theme(
+    plot.title = element_text(hjust = 0.5, face = 'bold'),
+        panel.background = element_rect(fill = 'white'),
+        panel.grid.major.x = element_line('darkgrey'),
+        panel.grid.major.y = element_line(color = 'darkgrey'),
+        axis.line = element_line(color = "black"),
+        panel.grid.minor.x = element_line(color = 'gray'),
+        panel.grid.minor.y = element_line(color = 'gray')
+  )+
+  xlab(expression(paste(delta^"13","C\u2030")))+
+  ylab(expression(paste(delta^"15","N\u2030")))+
+  coord_cartesian(xlim = c(-23, -17), ylim = c(6.5, 12))
+
+ggplot(filter(Archaeo, Period == "Roman"), aes(x=d13C, y=d15N, colour = Site))+
+geom_point(show.legend = TRUE, size = 2) +
+  theme(
+    plot.title = element_text(hjust = 0.5, face = 'bold'),
+        panel.background = element_rect(fill = 'white'),
+        panel.grid.major.x = element_line('darkgrey'),
+        panel.grid.major.y = element_line(color = 'darkgrey'),
+        axis.line = element_line(color = "black"),
+        panel.grid.minor.x = element_line(color = 'gray'),
+        panel.grid.minor.y = element_line(color = 'gray')
+  )+
+  xlab(expression(paste(delta^"13","C\u2030")))+
+  ylab(expression(paste(delta^"15","N\u2030")))+
+  coord_cartesian(xlim = c(-23, -17), ylim = c(6.5, 12))
+
+ggplot(filter(Archaeo, Period == "Anglo-Saxon"), aes(x=d13C, y=d15N, colour = Site))+
+geom_point(show.legend = TRUE, size = 2) +
+  theme(
+    plot.title = element_text(hjust = 0.5, face = 'bold'),
+        panel.background = element_rect(fill = 'white'),
+        panel.grid.major.x = element_line('darkgrey'),
+        panel.grid.major.y = element_line(color = 'darkgrey'),
+        axis.line = element_line(color = "black"),
+        panel.grid.minor.x = element_line(color = 'gray'),
+        panel.grid.minor.y = element_line(color = 'gray')
+  )+
+  xlab(expression(paste(delta^"13","C\u2030")))+
+  ylab(expression(paste(delta^"15","N\u2030")))+
+  coord_cartesian(xlim = c(-23, -17), ylim = c(6.5, 12))
+
+ggplot(filter(Archaeo, Period == "Medieval"), aes(x=d13C, y=d15N, colour = Site))+
+geom_point(show.legend = TRUE, size = 2) +
+  theme(
+    plot.title = element_text(hjust = 0.5, face = 'bold'),
+        panel.background = element_rect(fill = 'white'),
+        panel.grid.major.x = element_line('darkgrey'),
+        panel.grid.major.y = element_line(color = 'darkgrey'),
+        axis.line = element_line(color = "black"),
+        panel.grid.minor.x = element_line(color = 'gray'),
+        panel.grid.minor.y = element_line(color = 'gray')
+  )+
+  xlab(expression(paste(delta^"13","C\u2030")))+
+  ylab(expression(paste(delta^"15","N\u2030")))+
+  coord_cartesian(xlim = c(-23, -17), ylim = c(6.5, 12))
+
+ggplot(filter(Archaeo, Period == "Post-Medieval"), aes(x=d13C, y=d15N, colour = Site))+
+geom_point(show.legend = TRUE, size = 2) +
+  theme(
+    plot.title = element_text(hjust = 0.5, face = 'bold'),
+        panel.background = element_rect(fill = 'white'),
+        panel.grid.major.x = element_line('darkgrey'),
+        panel.grid.major.y = element_line(color = 'darkgrey'),
+        axis.line = element_line(color = "black"),
+        panel.grid.minor.x = element_line(color = 'gray'),
+        panel.grid.minor.y = element_line(color = 'gray')
+  )+
+  xlab(expression(paste(delta^"13","C\u2030")))+
+  ylab(expression(paste(delta^"15","N\u2030")))+
+  coord_cartesian(xlim = c(-23, -17), ylim = c(6.5, 12))
+
+ggplot(filter(Archaeo, Period == "Modern"), aes(x=d13C, y=d15N, colour = Site))+
+geom_point(show.legend = TRUE, size = 2) +
+  theme(
+    plot.title = element_text(hjust = 0.5, face = 'bold'),
+        panel.background = element_rect(fill = 'white'),
+        panel.grid.major.x = element_line('darkgrey'),
+        panel.grid.major.y = element_line(color = 'darkgrey'),
+        axis.line = element_line(color = "black"),
+        panel.grid.minor.x = element_line(color = 'gray'),
+        panel.grid.minor.y = element_line(color = 'gray')
+  )+
+  xlab(expression(paste(delta^"13","C\u2030")))+
+  ylab(expression(paste(delta^"15","N\u2030")))+
+  coord_cartesian(xlim = c(-23, -17), ylim = c(6.5, 12))
+
+```
+
