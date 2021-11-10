@@ -95,6 +95,9 @@ geom_point(show.legend = TRUE, size = 2) +
         panel.grid.minor.x = element_line(color = 'gray'),
         panel.grid.minor.y = element_line(color = 'gray')
   )+
+  labs(
+    title = "Iron Age"
+  ) +
   xlab(expression(paste(delta^"13","C\u2030")))+
   ylab(expression(paste(delta^"15","N\u2030")))+
   coord_cartesian(xlim = c(-23, -17), ylim = c(6.5, 12))
@@ -110,6 +113,9 @@ geom_point(show.legend = TRUE, size = 2) +
         panel.grid.minor.x = element_line(color = 'gray'),
         panel.grid.minor.y = element_line(color = 'gray')
   )+
+  labs(
+    title = "Roman"
+  ) +
   xlab(expression(paste(delta^"13","C\u2030")))+
   ylab(expression(paste(delta^"15","N\u2030")))+
   coord_cartesian(xlim = c(-23, -17), ylim = c(6.5, 12))
@@ -125,6 +131,9 @@ geom_point(show.legend = TRUE, size = 2) +
         panel.grid.minor.x = element_line(color = 'gray'),
         panel.grid.minor.y = element_line(color = 'gray')
   )+
+  labs(
+    title = "Anglo-Saxon"
+  ) +
   xlab(expression(paste(delta^"13","C\u2030")))+
   ylab(expression(paste(delta^"15","N\u2030")))+
   coord_cartesian(xlim = c(-23, -17), ylim = c(6.5, 12))
@@ -140,6 +149,9 @@ geom_point(show.legend = TRUE, size = 2) +
         panel.grid.minor.x = element_line(color = 'gray'),
         panel.grid.minor.y = element_line(color = 'gray')
   )+
+  labs(
+    title = "Medieval"
+  ) +
   xlab(expression(paste(delta^"13","C\u2030")))+
   ylab(expression(paste(delta^"15","N\u2030")))+
   coord_cartesian(xlim = c(-23, -17), ylim = c(6.5, 12))
@@ -155,6 +167,9 @@ geom_point(show.legend = TRUE, size = 2) +
         panel.grid.minor.x = element_line(color = 'gray'),
         panel.grid.minor.y = element_line(color = 'gray')
   )+
+  labs(
+    title = "Post-Medieval"
+  ) +
   xlab(expression(paste(delta^"13","C\u2030")))+
   ylab(expression(paste(delta^"15","N\u2030")))+
   coord_cartesian(xlim = c(-23, -17), ylim = c(6.5, 12))
@@ -170,6 +185,9 @@ geom_point(show.legend = TRUE, size = 2) +
         panel.grid.minor.x = element_line(color = 'gray'),
         panel.grid.minor.y = element_line(color = 'gray')
   )+
+  labs(
+    title = "Modern"
+  ) +
   xlab(expression(paste(delta^"13","C\u2030")))+
   ylab(expression(paste(delta^"15","N\u2030")))+
   coord_cartesian(xlim = c(-23, -17), ylim = c(6.5, 12))
